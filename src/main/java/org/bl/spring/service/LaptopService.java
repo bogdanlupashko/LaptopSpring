@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import org.bl.spring.impls.notebook.BaseModel;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -16,26 +17,28 @@ import java.util.Map;
  */
 
 @Path("/service")
+@ComponentScan
 public class LaptopService {
 
-    private final Map<String,BaseModel> modelMap;
+    private static Map<String, BaseModel> laptopMap;
 
-    @Autowired
-    public LaptopService(Map<String, BaseModel> modelMap) {
-        this.modelMap = modelMap;
-        System.out.println("created");
+    public LaptopService() {
     }
 
+    @Autowired
+    public LaptopService(Map<String, BaseModel> laptopMap) {
+        LaptopService.laptopMap = laptopMap;
+    }
 
     @GET
     @Produces("application/json")
     @Path("/bean-create")
     public String getLaptopInstance(@QueryParam("beanName") String beanName) {
         try {
-            return new Gson().toJson(modelMap.get(beanName));
-        } catch (BeansException be){
+            return new Gson().toJson(laptopMap);
+        } catch (BeansException be) {
             return "{\"error\": \"beanName=" + beanName + "  not avaliable \"}";
-        } catch (Exception e ){
+        } catch (Exception e) {
             return "{\"error\" : \" some error\"}";
         }
     }
