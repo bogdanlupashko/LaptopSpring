@@ -23,6 +23,7 @@ public class LaptopService {
     @Autowired
     public LaptopService(Map<String, BaseModel> modelMap) {
         this.modelMap = modelMap;
+        System.out.println("created");
     }
 
 

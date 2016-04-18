@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+>
+    <import resource="lenovo_context.xml"/>
+
+    <bean id="service" class="org.bl.spring.service.LaptopService">
+        <context:component-scan base-package="org.bl.spring.service"/>
+        <constructor-arg ref="modelMap" index="0"/>
+    </bean>
+
+
+    <util:map id="modelMap">
+        <entry key="baseModel" value-ref="baseModel"/>
+        <entry key="lenovo" value-ref="lenovo"/>
+    </util:map>
+
+
+</beans>
+

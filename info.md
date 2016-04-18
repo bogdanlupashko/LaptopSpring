@@ -1,0 +1,1 @@
+http://localhost:8080/service/bean-create?beanName=lenovo
