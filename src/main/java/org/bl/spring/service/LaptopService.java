@@ -1,0 +1,41 @@
+package org.bl.spring.service;
+
+import com.google.gson.Gson;
+import org.bl.spring.impls.notebook.BaseModel;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import java.util.Map;
+
+/**
+ * Created by bl on 07.04.2016.
+ */
+
+@Path("/service")
+public class LaptopService {
+
+    private final Map<String,BaseModel> modelMap;
+
+    @Autowired
+    public LaptopService(Map<String, BaseModel> modelMap) {
+        this.modelMap = modelMap;
+    }
+
+
+    @GET
+    @Produces("application/json")
+    @Path("/bean-create")
+    public String getLaptopInstance(@QueryParam("beanName") String beanName) {
+        try {
+            return new Gson().toJson(modelMap.get(beanName));
+        } catch (BeansException be){
+            return "{\"error\": \"beanName=" + beanName + "  not avaliable \"}";
+        } catch (Exception e ){
+            return "{\"error\" : \" some error\"}";
+        }
+    }
+}
