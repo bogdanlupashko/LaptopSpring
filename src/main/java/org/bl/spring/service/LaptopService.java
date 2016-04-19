@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import org.bl.spring.impls.notebook.BaseModel;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Controller;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -17,18 +17,19 @@ import java.util.Map;
  */
 
 @Path("/service")
-@ComponentScan
+@Controller
 public class LaptopService {
 
-    private static Map<String, BaseModel> laptopMap;
-
-    public LaptopService() {
-    }
-
     @Autowired
-    public LaptopService(Map<String, BaseModel> laptopMap) {
-        LaptopService.laptopMap = laptopMap;
-    }
+    private  Map<String, BaseModel> laptopMap;
+
+//    public LaptopService() {
+//    }
+//
+//    @Autowired
+//    public LaptopService(Map<String, BaseModel> laptopMap) {
+//        LaptopService.laptopMap = laptopMap;
+//    }
 
     @GET
     @Produces("application/json")
@@ -41,5 +42,9 @@ public class LaptopService {
         } catch (Exception e) {
             return "{\"error\" : \" some error\"}";
         }
+    }
+
+    public void setLaptopMap(Map laptopMap) {
+        this.laptopMap = laptopMap;
     }
 }

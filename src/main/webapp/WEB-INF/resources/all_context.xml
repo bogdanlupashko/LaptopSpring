@@ -6,7 +6,7 @@
     <import resource="lenovo_context.xml"/>
 
     <bean class="org.bl.spring.service.LaptopService" lazy-init="false">
-        <constructor-arg name="laptopMap" ref="modelMap"/>
+        <property name="laptopMap" ref="modelMap"/>
     </bean>
 
     <util:map id="modelMap">
